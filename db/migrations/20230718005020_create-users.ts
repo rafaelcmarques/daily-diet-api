@@ -6,7 +6,6 @@ export async function up(knex: Knex): Promise<void> {
     user.text('name').notNullable()
     user.text('email').notNullable()
     user.text('password').notNullable()
-    user.uuid('session_id')
   })
 }
 

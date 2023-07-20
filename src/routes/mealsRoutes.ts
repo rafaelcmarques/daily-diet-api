@@ -12,13 +12,27 @@ export async function mealsRoutes(app: FastifyInstance){
       date: z.string(),
       time: z.string(),
       onDiet :z.boolean(),
-      userId: z.string().uuid()
     })
 
-    const { name, description, date, time, onDiet, userId } = createMealSchema.parse(request.body)
+    const userId = request.cookies.userId
+    if(!userId){
+      return reply.status(401).send({
+        error: 'Unauthorized.'
+      })
+    }
+
+    const { name, description, date, time, onDiet } = createMealSchema.parse(request.body)
 
     try{
-      await knex('meals').insert({ id: crypto.randomUUID(), name, description, date, time, onDiet, userId})
+      await knex('meals').insert({ 
+        id: crypto.randomUUID(), 
+        name, 
+        description, 
+        date, 
+        time, 
+        onDiet, 
+        userId
+      })
       return reply.status(201).send()
     }catch(e){
       console.log(e)
