@@ -26,3 +26,11 @@ Em seguida de o comando para rodar o servidor localmente:
 ```bash
   npm run dev 
 ```
+
+## Tecnologias Utilizadas
+ - fastify
+ - @fastify/cookie
+ - dotenv
+ - knex
+ - sqlite3
+ - zod
